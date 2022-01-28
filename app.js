@@ -39,20 +39,32 @@ function addTodo(event) {
 
 function deleteCheck(e) {
   const item = e.target;
-  //DELETE TODO
+  //DELTE TODO
   if (item.classList[0] === "trash-btn") {
     const todo = item.parentElement;
-    //Animation
-    todo.classList.add("fall");
-    todo.addEventListener("transitionend", function () {
-      todo.remove();
-    });
+    todo.remove();
   }
-
   //CHECK MARK
-
   if (item.classList[0] === "complete-btn") {
     const todo = item.parentElement;
     todo.classList.toggle("completed");
   }
+}
+
+// nested if statements
+function filterTodo(e) {
+  const todos = todoList.childNodes;
+  todos.forEach(function (todo) {
+    if (e.target.value === "all") {
+      todo.style.display = "flex";
+    } else if (e.target.value === "complete") {
+      if (todo.classList.contains("completed")) {
+        todo.style.display = "flex";
+      } else todo.style.display = "none";
+    } else {
+      if (!todo.classList.contains("completed")) {
+        todo.style.display = "flex";
+      } else todo.style.display = "none";
+    }
+  });
 }
